@@ -8,7 +8,7 @@ gem "nifty-key-value-store", ">= 1.0.1", "< 2.0.0"
 gem "nifty-utils", "~> 1.0"
 gem "nifty-attachments", ">= 1.0.3", "< 2.0.0"
 gem "nifty-dialog", "~> 1.0"
-
+gem 'rails_12factor'
 group :development do
   gem 'capistrano'
   gem 'activerecord-sqlserver-adapter'
