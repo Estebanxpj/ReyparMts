@@ -32,7 +32,7 @@ Rails.application.routes.draw do
   match 'login/reset' => 'sessions#reset', :via => [:get, :post]
   
   delete 'logout' => 'sessions#destroy'
-  root :to => 'login#index'
+  root :to => 'dashboard#home'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
