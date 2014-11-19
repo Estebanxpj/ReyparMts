@@ -22,7 +22,7 @@ namespace :shoppe do
   
   desc "Run the key setup tasks for a new application"
   task :setup => :environment do
-    Rake::Task["shoppe:import_countries"].invoke    if Country.all.empty?
+    #Rake::Task["shoppe:import_countries"].invoke    if Country.all.empty?
     Rake::Task["shoppe:create_default_user"].invoke if User.all.empty?
   end
   
