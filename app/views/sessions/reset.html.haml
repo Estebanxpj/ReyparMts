@@ -1,0 +1,11 @@
+- @page_title = 'Registro'
+= display_flash
+.loginArea
+  %h2 Restablecer Contraseña
+  = form_tag :login_reset, :class => 'login' do
+    %p.field
+      = text_field_tag 'email_address', params[:email_address], :class => 'focus', :placeholder => 'Correo Electronico'
+    %p.submit
+      = submit_tag "Enviar", :class => 'button green'
+    %p.reset
+      = link_to "Volver a Registro", login_path

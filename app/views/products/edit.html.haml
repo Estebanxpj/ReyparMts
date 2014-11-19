@@ -1,0 +1,8 @@
+- @page_title = "Productos"
+= content_for :header do
+  %p.buttons
+    = link_to "Variantes", [@product, :variants], :class => 'button'
+    = link_to "Caracteristicas", stock_level_adjustments_path(:item_id => @product.id, :item_type => @product.class), :class => 'button', :rel => 'dialog', :data => {:dialog_width => 700, :dialog_behavior => 'stockLevelAdjustments'}
+    = link_to "Ir a Productos", :products, :class => 'button'
+  %h2.products Productos
+= render 'form'

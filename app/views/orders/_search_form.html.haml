@@ -1,0 +1,24 @@
+.orderSearch{:style => action_name == 'search' ? "display:block" : ''}
+  = search_form_for @query, :url => search_orders_path, :html => { :method => :post } do |f|
+    %dl.left
+      %dt= f.label :id_eq, "Numero Pedido"
+      %dd= f.text_field :id_eq
+      %dt= f.label :first_name_or_last_name_or_company_cont, "Cliente"
+      %dd= f.text_field :first_name_or_last_name_or_company_cont
+      %dt= f.label :address1_or_address2_or_address3_or_address4_or_postcode_cont, "Direccion"
+      %dd= f.text_field :billing_address1_or_billing_address2_or_billing_address3_or_billing_address4_or_billing_postcode_cont
+      %dt= f.label :consignment_number_cont, "Cuenta"
+      %dd= f.text_field :consignment_number_cont
+      %dt= f.label :received_at_eq, "Pedidos entre"
+      %dd
+        = f.text_field :received_at_gteq, :class => 'small'
+        &rarr;
+        = f.text_field :received_at_lteq, :class => 'small'
+    %dl.right
+      %dt= f.label :email_address_cont, "Direccion de Correo"
+      %dd= f.text_field :email_address_cont
+      %dt= f.label :phone_number_cont, "Telefono"
+      %dd= f.text_field :phone_number_cont
+      %dt= f.label :status_eq, "Status"
+      %dd= f.select :status_eq, [nil] + Order::STATUSES.map { |s| [s.humanize, s]}
+      %dd= f.submit "Buscar", :class => 'button green button'

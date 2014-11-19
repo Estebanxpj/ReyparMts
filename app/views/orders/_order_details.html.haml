@@ -1,0 +1,46 @@
+.details
+  .left
+    %dl
+      %dt Nombre
+      %dd= @order.full_name
+      %dt Contacto
+      %dd= @order.company.blank? ? '-' : @order.company
+      %dt Billing#{@order.separate_delivery_address? ? '' : '/Delivery'} Direccion
+      %dd= @order.billing_address1
+      %dd= @order.billing_postcode
+      %dd= @order.billing_country.try(:name)
+      - if @order.separate_delivery_address?
+        %dt Direccion
+        %dd= @order.delivery_name
+        %dd= @order.delivery_address1
+        %dd= @order.delivery_postcode
+        %dd= @order.delivery_country.try(:name)
+  .right
+    %dl
+      %dt Correo Electronico
+      %dd= mail_to @order.email_address
+      %dt Telefono
+      %dd= @order.phone_number
+      %dt Peso
+      %dd= number_to_weight @order.total_weight
+      - if @order.received?
+        %dt Tiempo de entrega
+        %dd= distance_of_time_in_words(@order.created_at, @order.received_at)
+      - if @order.invoiced?
+        %dt Invoice Number
+        %dd= @order.invoice_number
+      %dt Total Pedido
+      %dd= boolean_tag @order.paid_in_full?, nil, :true_text => number_to_currency(@order.balance), :false_text => number_to_currency(@order.balance)
+    - if @order.accepted? && !@order.shipped?
+      = form_tag [:ship, @order] do
+        %dl.form
+          %dt.padding= label_tag 'consignment_number', 'Cuenta'
+          %dd= text_field_tag 'consignment_number', '', :class => 'text'
+        %dl.form
+          %dd= submit_tag "Mark as shipped", :class => 'button green button-mini'
+    
+    - unless @order.accepted? || @order.rejected?
+      %dl.form
+        %dd
+          = link_to "Acceptar", [:accept, @order], :method => :post, :class => 'button green'
+          = link_to "Rechasar", [:reject, @order], :method => :post, :class => 'button purple'

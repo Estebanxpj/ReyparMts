@@ -1,0 +1,12 @@
+- @page_title = 'Registro'
+= display_flash
+.loginArea
+  = form_tag :login, :class => 'login' do
+    %p.field
+      = text_field_tag 'email_address', params[:email_address], :class => 'focus', :placeholder => 'DireccionE-Mail'
+    %p.field
+      = password_field_tag 'password', params[:password], :class => '', :placeholder => 'Contraseña'
+    %p.submit
+      = submit_tag "Entrar", :class => 'button green'
+    %p.reset
+      = link_to "Perdiste tu contraseña?", login_reset_path

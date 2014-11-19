@@ -1,0 +1,17 @@
+- @page_title = "Usuario"
+
+= content_for :header do
+  %p.buttons=link_to "Nuevo Usuario", :new_user, :class => 'button green'
+  %h2.users Users
+
+.table
+  %table.data
+    %thead
+      %tr
+        %th Nomber
+        %th Correo Electronico
+    %tbody
+      - for user in @users
+        %tr
+          %td= link_to user.full_name, [:edit, user]
+          %td= user.email_address

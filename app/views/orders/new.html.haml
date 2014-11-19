@@ -1,0 +1,20 @@
+- @page_title = 'Nuevo Pedido'
+= content_for :header do
+  %p.buttons= link_to "Ir a Pedidos", :orders, :class => 'button grey'
+  %h2.orders Nuevo Pedido
+
+= form_tag({:controller => "orders", :action => "new"}, :method => "get") do 
+  %dl.left 
+    %dt Nit
+    %dd= text_field_tag "nit", params[:nit]
+  %dl.right
+    %dd= submit_tag "Buscar", :class => 'button purple button-mini'
+
+= form_for @order, :html => {:class => 'orderForm newOrder'} do |f|
+  = f.error_messages
+  = render 'form', :f => f
+  = field_set_tag "Pedido", :class => 'padded' do
+    = render 'order_items_form', :f => f
+  %p.submit
+    = f.submit "Crear Pedido", :class => 'button green'
+    = link_to "Cancelar", :orders, :class => 'button grey'

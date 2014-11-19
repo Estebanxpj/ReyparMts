@@ -1,0 +1,28 @@
+= form_for @user do |f|
+  = f.error_messages
+  = field_set_tag "Detalles Usuios" do
+    .splitContainer
+      %dl.half
+        %dt= f.label :first_name, "Nombre"
+        %dd= f.text_field :first_name, :class => 'focus text'
+      %dl.half
+        %dt= f.label :last_name, "Apellidos"
+        %dd= f.text_field :last_name, :class => 'text'
+  = field_set_tag "Login" do
+    .splitContainer
+      %dl.third
+        %dt= f.label :email_address, "Direccion de correo"
+        %dd= f.text_field :email_address, :class => 'text'
+      %dl.third
+        %dt= f.label :password, "Contraseña"
+        %dd= f.password_field :password, :class => 'text'
+      %dl.third
+        %dt= f.label :password_confirmation, "Confirmar Contaseña"
+        %dd= f.password_field :password_confirmation, :class => 'text'
+
+
+  %p.submit
+    - unless @user.new_record?
+      %span.right= link_to "Eliminar", @user, :class => 'button purple', :method => :delete, :data => {:confirm => "Are you sure you wish to remove this user?"}
+    = f.submit :class => 'button green'
+    = link_to "Cancelar", :users, :class => 'button'

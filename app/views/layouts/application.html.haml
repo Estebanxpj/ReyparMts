@@ -1,0 +1,33 @@
+%html
+  %head
+    %title #{@page_title} - ReyparMotos
+    = stylesheet_link_tag 'shoppe/application'
+    = javascript_include_tag 'shoppe/application'
+    = csrf_meta_tags
+    :javascript
+  %body
+    %nav.sidebar
+      %header.logo
+        %h1= link_to "ReyparMotos", root_path
+      %p.logged
+        Usuario: #{current_user.full_name}
+      %ul
+        %li
+          %span.pending= Order.pending.count
+          = link_to "Pedidos", [:orders], :class => @active_nav == :orders ? 'active' : ''
+        %li= link_to "Productos", [:products], :class => @active_nav == :products ? 'active' : ''
+        %li= link_to "Cateorias de Productos", :product_categories, :class => @active_nav == :product_categories ? 'active' : ''
+        %li= link_to "Domicilios", [:delivery_services], :class => @active_nav == :delivery_services ? 'active' : ''
+        %li= link_to "Tasas De inpuestos", :tax_rates, :class => @active_nav == :tax_rates ? 'active' : ''
+        %li= link_to "Usuarios", [:users], :class => @active_nav == :users ? 'active' : ''
+        %li= link_to "Ciudades", :countries, :class => @active_nav == :countries ? 'active' : ''
+        %li= link_to "Settings", :settings, :class => @active_nav == :settings ? 'active' : ''
+        %li= link_to "Salir", [:logout], :method => :delete
+    
+    %header.main
+      = yield :header
+      
+    #content  
+      = display_flash
+      %section.main
+        = yield

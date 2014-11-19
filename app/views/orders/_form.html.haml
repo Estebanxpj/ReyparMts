@@ -1,0 +1,54 @@
+= field_set_tag "Datos Cliente" do
+  .splitContainer
+    %dl.third
+      %dt= f.label :first_name, "Nombre"
+      %dd= f.text_field :first_name, :value =>@first_name, :class => 'focus text'
+    %dl.third
+      %dt= f.label :last_name, "Apellido"
+      %dd= f.text_field :last_name, :value =>@last_name, :class => 'text'
+    %dl.third
+      %dt= f.label :company, "Contacto"
+      %dd= f.text_field :company, :value =>@company, :class => 'text'
+  %dl
+    %dt= f.label :billing_address1, "Direccion"
+    %dd.space= f.text_field :billing_address1, :value =>@billing_address1, :class => 'text'
+  .splitContainer
+    %dl.half
+      %dt= f.label :billing_postcode, "Codigo Postal"
+      %dd= f.text_field :billing_postcode, :value => @billing_postcode, :class => 'text'
+    %dl.half
+      %dt= f.label :billing_country_id, "Ciudad"
+      %dd= f.collection_select :billing_country_id, Country.ordered, :id, :name, {:include_blank => true}, {:data => {:placeholder => 'Seleccione un Pais'}}
+  .splitContainer
+    %dl.third
+      %dt= f.label :email_address, "Direccion de correo"
+      %dd= f.text_field :email_address, :value => @email_address, :class => 'text'
+    %dl.third
+      %dt= f.label :phone_number, "Telefono"
+      %dd= f.text_field :phone_number, :value => @phone_number,  :class => 'text'
+    %dl.third
+      %dt= f.label :separate_delivery_address,"Otras Direcciones"
+      %dd.checkbox
+        = f.check_box :separate_delivery_address
+        = f.label :separate_delivery_address, "Utilizar una direccion de entrega distinta?"
+
+
+= field_set_tag "Notas" do
+  %dl
+    %dt= f.label :notes, "Notas"
+    %dd= f.text_area :notes, :class => 'text'
+
+= field_set_tag "Direccion", :class => 'delivery' do
+  %dl
+    %dt= f.label :delivery_name, "Nombre Entrega"
+    %dd= f.text_field :delivery_name, :class => 'text'
+  %dl
+    %dt= f.label :delivery_address1, "Direccion"
+    %dd.space= f.text_field :delivery_address1, :class => 'text'
+  .splitContainer
+    %dl.half
+      %dt= f.label :delivery_postcode, "Codigo Postal"
+      %dd= f.text_field :delivery_postcode, :class => 'text'
+    %dl.half
+      %dt= f.label :delivery_country_id, "Ciudad"
+      %dd= f.collection_select :delivery_country_id, Country.ordered, :id, :name, {:include_blank => true}, {:data => {:placeholder => 'Seleccione un Pais'}}

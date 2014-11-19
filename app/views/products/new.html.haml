@@ -1,0 +1,5 @@
+- @page_title = "Productos"
+= content_for :header do
+  %p.buttons= link_to "ir a Productos", :products, :class => 'button'
+  %h2.products Products
+= render 'form'
